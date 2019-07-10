@@ -4248,6 +4248,9 @@ static crypt_key_t *get_candidates (LIST * hints, unsigned int app, int secret)
             patarr[n++] = safe_strdup (l->data);
         }
       patarr[n] = NULL;
+
+      gpgme_set_keylist_mode (ctx, GPGME_KEYLIST_MODE_LOCAL | GPGME_KEYLIST_MODE_EXTERN);
+
       err = gpgme_op_keylist_ext_start (ctx, (const char**)patarr, secret, 0);
       for (n=0; patarr[n]; n++)
         FREE (&patarr[n]);
